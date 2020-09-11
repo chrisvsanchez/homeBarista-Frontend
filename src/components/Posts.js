@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Image, Button, Icon } from "semantic-ui-react";
+import { Card, Image, Button, Icon, Segment } from "semantic-ui-react";
 
 class Post extends React.Component {
   handleClickDelete = (e) => {
@@ -8,7 +8,7 @@ class Post extends React.Component {
   render() {
     // console.log(this.props);
     return (
-      <Card color="red">
+      <Card style={{ backgroundColor: "#DDC9B4" }}>
         <div>
           <Button animated>
             <Button.Content visible>Edit</Button.Content>
@@ -22,6 +22,13 @@ class Post extends React.Component {
               <Icon name="delete" />
             </Button.Content>
           </Button>
+          <Button animated onClick={"hello"}>
+            <Button.Content visible>Comments</Button.Content>
+            <Button.Content hidden>
+              <Icon name="Comments" />
+            </Button.Content>
+          </Button>
+
           <Image
             src={this.props.post.image}
             as="a"

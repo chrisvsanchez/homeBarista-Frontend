@@ -11,14 +11,14 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <>
+    <div style={{ backgroundColor: "#ddc9b4" }}>
       {/* <Routes> */}
       {/* <Route></Route> */}
       <NavBar />
       <MainContainer />
       <Footer />
       {/* </Routes> */}
-    </>
+    </div>
   );
 }
 

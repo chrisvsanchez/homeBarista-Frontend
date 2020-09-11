@@ -1,5 +1,7 @@
 import React from "react";
-import { Input, Menu } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { Image } from "semantic-ui-react";
+import MyImage from "/Users/chrissanchez/Desktop/HomeBarista/homebarista-frontend/src/Images/Home_barista_logo_white.png";
 class NavBar extends React.Component {
   state = { activeItem: "home", userSearch: "" };
 
@@ -10,32 +12,23 @@ class NavBar extends React.Component {
 
     return (
       <div>
-        <Menu pointing>
-          <Menu.Item
-            name="home"
-            active={activeItem === "home"}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="Feed"
-            active={activeItem === "Feed"}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="Profile Page"
-            active={activeItem === "Profile Page"}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Menu position="right">
-            <Menu.Item>
-              <Input
-                icon="search"
-                placeholder="Search..."
-                value={this.state.userSearch}
-              />
-            </Menu.Item>
-          </Menu.Menu>
-        </Menu>
+        <div class="ui inverted menu" id="menu">
+          <a class="image">
+            <Image size={"tiny"} right floated src={MyImage} />
+          </a>
+          <a class="item">
+            <Link to="/Home">Home</Link>
+          </a>
+          <a class="item">
+            <Link to="/profilePage">Profile Page</Link>
+          </a>
+          <a class="item active">
+            <Link to="/feed" exact>
+              {" "}
+              Feed{" "}
+            </Link>
+          </a>
+        </div>
       </div>
     );
   }

@@ -1,12 +1,13 @@
 import React from "react";
 import MyPostsContainer from "./myPostContainer";
-import { Segment, Image, Form } from "semantic-ui-react";
+import { Segment, Image, Form, Grid, Button } from "semantic-ui-react";
 
 class ProfilePage extends React.Component {
   state = {
     title: "",
     article: "",
     image: "",
+    createForm: false,
   };
   handleChange = (e) => {
     const target = e.target;
@@ -36,59 +37,89 @@ class ProfilePage extends React.Component {
       .then((newlyCreatedPost) => {
         console.log(newlyCreatedPost);
         this.props.addPostToCurrentUser(newlyCreatedPost);
+        this.setState({
+          title: "",
+          article: "",
+          image: "",
+        });
       });
+  };
+  createPostForm = () => {
+    return (
+      <Segment>
+        <Form onSubmit={this.submitHandler}>
+          <h1>{"Create a Post!"}</h1>
+          <Form.Group widths="equal">
+            <Form.Input
+              fluid
+              label="Image URL"
+              placeholder="url"
+              name="image"
+              value={this.state.image}
+              onChange={this.handleChange}
+            />
+            <Form.Input
+              fluid
+              label="Title"
+              placeholder="Title"
+              name="title"
+              value={this.state.title}
+              onChange={this.handleChange}
+            />
+            <Form.TextArea
+              fluid
+              label="Article Body"
+              placeholder="Article"
+              name="article"
+              value={this.state.article}
+              onChange={this.handleChange}
+            />
+          </Form.Group>
+          <Form.Button>Submit</Form.Button>
+        </Form>
+      </Segment>
+    );
+  };
+  handleForm = () => {
+    this.setState({
+      createForm: !this.state.createForm,
+    });
+    return this.createPostForm();
   };
   render() {
     return (
-      <div style={{ border: "3px solid red" }}>
-        <h2>Profile Page</h2>
+      <div style={{ backgroundColor: "#ddc9b4" }}>
+        <h2>Welcome Back {this.props.userObj.name}!</h2>
+
+        {this.state.createForm ? this.createPostForm() : null}
+
         <Segment>
-          <Form onSubmit={this.submitHandler}>
-            <h1>{"Create a Post!"}</h1>
-            <Form.Group widths="equal">
-              <Form.Input
-                fluid
-                label="Image URL"
-                placeholder="url"
-                name="image"
-                value={this.state.image}
-                onChange={this.handleChange}
-              />
-              <Form.Input
-                fluid
-                label="Title"
-                placeholder="Title"
-                name="title"
-                value={this.state.title}
-                onChange={this.handleChange}
-              />
-              <Form.TextArea
-                fluid
-                label="Article Body"
-                placeholder="Article"
-                name="article"
-                value={this.state.article}
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Button>Submit</Form.Button>
-          </Form>
-        </Segment>
-        <Segment>
-          <div>
-            <Image
-              floated="left"
-              src={this.props.userObj.profile_img}
-              size="small"
-              circular
-            />
-            <h3>Bio</h3>
-            <p>{this.props.userObj.bio}</p>
-            <h5>Favorite Coffee Blend/Origin</h5>
-            <p>{this.props.userObj.current_coffee_beans}</p>
-            <h5>Coffee Medium</h5>
-            <p>{this.props.userObj.current_coffee_beans}</p>
-          </div>
+          <Segment>
+            <Grid>
+              <Grid.Column width={4}>
+                <Image
+                  floated="left"
+                  src={this.props.userObj.profile_img}
+                  size="small"
+                  circular
+                />
+              </Grid.Column>
+              <Grid.Column width={9}>
+                <h3>Bio</h3>
+                <p>{this.props.userObj.bio}</p>
+                <h5>Favorite Coffee Blend/Origin</h5>
+                <span>{this.props.userObj.current_coffee_beans}</span>
+                <h5>Coffee Medium</h5>
+                <span>{this.props.userObj.coffee_medium}</span>
+              </Grid.Column>
+              <Grid.Column>
+                <Button class="ui basic button" onClick={this.handleForm}>
+                  <i class="coffee"></i>
+                  Create a Post
+                </Button>
+              </Grid.Column>
+            </Grid>
+          </Segment>
           <MyPostsContainer
             deletePost={this.props.deletePost}
             userPosts={this.props.userPosts}

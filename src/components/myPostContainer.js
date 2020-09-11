@@ -8,7 +8,11 @@ class MyPostsContainer extends React.Component {
     ));
   };
   render() {
-    return <Card.Group itemsPerRow={4}>{this.turnToPost()}</Card.Group>;
+    return (
+      <Card.Group itemsPerRow={4} style={{ backgroundColor: "#7A6C5D" }}>
+        {this.turnToPost()}
+      </Card.Group>
+    );
   }
 }
 

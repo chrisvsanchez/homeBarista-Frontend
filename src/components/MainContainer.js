@@ -1,12 +1,13 @@
 import React from "react";
 import ProfilePage from "./ProfilePage";
+import Home from "./Home";
 import { Switch, Route } from "react-router-dom";
 import UserFeedPage from "./UserFeedPage";
 // import { Feed } from "semantic-ui-react";
 class MainContainer extends React.Component {
   state = {
     currentUsersPosts: [],
-    currentUser: 3,
+    currentUser: 7,
   };
   componentDidMount() {
     fetch(`http://localhost:3000/users/${this.state.currentUser}`)
@@ -44,8 +45,7 @@ class MainContainer extends React.Component {
 
   render() {
     return (
-      <div style={{ border: "3px solid blue" }}>
-        <h1>Main Container</h1>
+      <div style={{ backgroundColor: "#ddc9b4" }}>
         <Switch>
           <Route path="/profilePage">
             <ProfilePage
@@ -57,6 +57,9 @@ class MainContainer extends React.Component {
           </Route>
           <Route path="/Feed">
             <UserFeedPage />
+          </Route>
+          <Route path="/Home">
+            <Home />
           </Route>
         </Switch>
       </div>
