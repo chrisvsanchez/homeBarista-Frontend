@@ -93,7 +93,7 @@ class ProfilePage extends React.Component {
 
         {this.state.createForm ? this.createPostForm() : null}
 
-        <Segment>
+        <Segment style={{ backgroundColor: "#ddc9b4" }}>
           <Segment>
             <Grid>
               <Grid.Column width={4}>
@@ -115,7 +115,7 @@ class ProfilePage extends React.Component {
               <Grid.Column>
                 <Button class="ui basic button" onClick={this.handleForm}>
                   <i class="coffee"></i>
-                  Create a Post
+                  Create Post
                 </Button>
               </Grid.Column>
             </Grid>

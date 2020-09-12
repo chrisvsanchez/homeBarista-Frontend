@@ -22,12 +22,12 @@ class Post extends React.Component {
               <Icon name="delete" />
             </Button.Content>
           </Button>
-          <Button animated onClick={"hello"}>
+          {/* <Button animated onClick={"hello"}>
             <Button.Content visible>Comments</Button.Content>
             <Button.Content hidden>
               <Icon name="Comments" />
             </Button.Content>
-          </Button>
+          </Button> */}
 
           <Image
             src={this.props.post.image}

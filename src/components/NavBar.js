@@ -16,13 +16,13 @@ class NavBar extends React.Component {
           <a class="image">
             <Image size={"tiny"} right floated src={MyImage} />
           </a>
-          <a class="item">
+          <a class="item active">
             <Link to="/Home">Home</Link>
           </a>
           <a class="item">
             <Link to="/profilePage">Profile Page</Link>
           </a>
-          <a class="item active">
+          <a class="item">
             <Link to="/feed" exact>
               {" "}
               Feed{" "}
