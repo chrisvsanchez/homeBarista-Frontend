@@ -103,8 +103,8 @@ class ProfilePage extends React.Component {
                     "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
                   }
                   // src={this.props.userObj.profile_img}
-                  size="small"
-                  circular
+                  size="medium"
+                  rounded
                 />
               </Grid.Column>
               <Grid.Column width={9}>
