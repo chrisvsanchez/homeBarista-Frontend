@@ -3,23 +3,50 @@ import ProfilePage from "./ProfilePage";
 import Home from "./Home";
 import { Switch, Route } from "react-router-dom";
 import UserFeedPage from "./UserFeedPage";
-// import { Feed } from "semantic-ui-react";
 class MainContainer extends React.Component {
   state = {
     currentUsersPosts: [],
     currentUser: 7,
   };
+  handleLogin = (currentUser) => {
+    this.setState({ currentUser }, () => {
+      this.props.history.push("/");
+    });
+  };
+  handleLogout = () => {
+    // localStorage.clear();
+    localStorage.removeItem("token");
+    this.setState(
+      {
+        currentUser: null,
+      },
+      () => this.props.history.push("/")
+    );
+  };
   componentDidMount() {
-    fetch(`http://localhost:3000/users/${this.state.currentUser}`)
-      .then((r) => r.json())
-      .then((UserObj) => {
-        // console.log(UserObj)
-        this.setState({
-          currentUser: UserObj,
-          currentUsersPosts: UserObj.posts,
+    if (localStorage.token) {
+      fetch(`http://localhost:3000/autologin`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`,
+        },
+      })
+        .then((r) => r.json())
+        .then((loggedInUser) => {
+          this.handleLogin(loggedInUser);
         });
-      });
+    }
   }
+  // componentDidMount() {
+  //   fetch(`http://localhost:3000/users/${this.state.currentUser}`)
+  //     .then((r) => r.json())
+  //     .then((UserObj) => {
+  //       // console.log(UserObj)
+  //       this.setState({
+  //         currentUser: UserObj,
+  //         currentUsersPosts: UserObj.posts,
+  //       });
+  //     });
+  // }
   addPostToCurrentUser = (newPostObj) => {
     const newPost = [newPostObj, ...this.state.currentUsersPosts];
     this.setState({
@@ -59,7 +86,7 @@ class MainContainer extends React.Component {
             <UserFeedPage />
           </Route>
           <Route path="/Home">
-            <Home />
+            <Home handleLogin={this.handleLogin} />
           </Route>
         </Switch>
       </div>

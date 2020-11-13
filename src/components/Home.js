@@ -1,10 +1,10 @@
 import React from "react";
-import { Image } from "semantic-ui-react";
+
 import Login from "./Login/Login";
-function Home() {
+function Home(props) {
   return (
     <div>
-      <Login />
+      <Login handleLogin={props.handleLogin} />
     </div>
   );
 }
