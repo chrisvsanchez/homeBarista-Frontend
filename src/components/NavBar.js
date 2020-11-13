@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Image } from "semantic-ui-react";
-import MyImage from "/Users/chrissanchez/Desktop/HomeBarista/homebarista-frontend/src/Images/Home_barista_logo_white.png";
+import MyImage from "./Images/Home_barista_logo_white.png";
 class NavBar extends React.Component {
   state = { activeItem: "home", userSearch: "" };
 
