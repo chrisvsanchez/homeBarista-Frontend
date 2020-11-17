@@ -24,6 +24,7 @@ class Login extends React.Component {
       .then((data) => {
         console.log(data);
         const { user, token } = data;
+
         this.props.handleLogin(user);
         localStorage.token = token;
       });

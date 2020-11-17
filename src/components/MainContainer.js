@@ -1,16 +1,17 @@
 import React from "react";
 import ProfilePage from "./ProfilePage";
 import Home from "./Home";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import UserFeedPage from "./UserFeedPage";
+import NavBar from "./NavBar";
 class MainContainer extends React.Component {
   state = {
     currentUsersPosts: [],
-    currentUser: 7,
+    currentUser: null,
   };
   handleLogin = (currentUser) => {
     this.setState({ currentUser }, () => {
-      this.props.history.push("/");
+      this.props.history.push("/profilePage");
     });
   };
   handleLogout = () => {
@@ -72,26 +73,32 @@ class MainContainer extends React.Component {
 
   render() {
     return (
-      <div style={{ backgroundColor: "#ddc9b4" }}>
-        <Switch>
-          <Route path="/profilePage">
-            <ProfilePage
-              userPosts={this.state.currentUsersPosts}
-              userObj={this.state.currentUser}
-              addPostToCurrentUser={this.addPostToCurrentUser}
-              deletePost={this.deletePost}
-            />
-          </Route>
-          <Route path="/Feed">
-            <UserFeedPage />
-          </Route>
-          <Route path="/Home">
-            <Home handleLogin={this.handleLogin} />
-          </Route>
-        </Switch>
-      </div>
+      <>
+        <NavBar
+          currentUser={this.state.currentUser}
+          logout={this.handleLogout}
+        />
+        <div style={{ backgroundColor: "#ddc9b4" }}>
+          <Switch>
+            <Route path="/profilePage">
+              <ProfilePage
+                userPosts={this.state.currentUsersPosts}
+                currentUser={this.state.currentUser}
+                addPostToCurrentUser={this.addPostToCurrentUser}
+                deletePost={this.deletePost}
+              />
+            </Route>
+            <Route path="/Feed">
+              <UserFeedPage />
+            </Route>
+            <Route path="/Home">
+              <Home handleLogin={this.handleLogin} />
+            </Route>
+          </Switch>
+        </div>
+      </>
     );
   }
 }
 
-export default MainContainer;
+export default withRouter(MainContainer);

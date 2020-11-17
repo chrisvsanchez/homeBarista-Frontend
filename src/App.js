@@ -14,7 +14,7 @@ function App() {
     <div>
       {/* <Routes> */}
       {/* <Route></Route> */}
-      <NavBar />
+      {/* <NavBar /> */}
       <MainContainer />
       <Footer />
       {/* </Routes> */}

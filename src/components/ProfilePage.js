@@ -23,7 +23,7 @@ class ProfilePage extends React.Component {
       article_text: this.state.article,
       title: this.state.title,
       image: this.state.image,
-      user_id: this.props.userObj.id,
+      user_id: this.props.currentUser.id,
       reviews: [],
     };
     fetch(`http://localhost:3000/posts`, {
@@ -89,7 +89,7 @@ class ProfilePage extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: "#ddc9b4" }}>
-        <h2>Welcome Back {this.props.userObj.name}!</h2>
+        {/* <h2>Welcome Back {this.props.userObj.name}!</h2> */}
 
         {this.state.createForm ? this.createPostForm() : null}
 
@@ -99,21 +99,18 @@ class ProfilePage extends React.Component {
               <Grid.Column width={4}>
                 <Image
                   floated="left"
-                  src={
-                    "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                  }
-                  // src={this.props.userObj.profile_img}
+                  src={this.props.currentUser.profile_img}
                   size="medium"
                   rounded
                 />
               </Grid.Column>
               <Grid.Column width={9}>
                 <h3>Bio</h3>
-                <p>{this.props.userObj.bio}</p>
+                <p>{this.props.currentUser.bio}</p>
                 <h5>Favorite Coffee Blend/Origin</h5>
-                <span>{this.props.userObj.current_coffee_beans}</span>
+                <span>{this.props.currentUser.current_coffee_beans}</span>
                 <h5>Coffee Medium</h5>
-                <span>{this.props.userObj.coffee_medium}</span>
+                <span>{this.props.currentUser.coffee_medium}</span>
               </Grid.Column>
               <Grid.Column>
                 <Button class="ui basic button" onClick={this.handleForm}>

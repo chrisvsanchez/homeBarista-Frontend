@@ -19,15 +19,24 @@ class NavBar extends React.Component {
           <a class="item active">
             <Link to="/Home">Home</Link>
           </a>
-          <a class="item">
-            <Link to="/profilePage">Profile Page</Link>
-          </a>
-          <a class="item">
-            <Link to="/feed" exact>
-              {" "}
-              Feed{" "}
-            </Link>
-          </a>
+          {this.props.currentUser ? (
+            <>
+              <a class="item">
+                <Link to="/profilePage">Profile Page</Link>
+              </a>
+              <a class="item">
+                <Link to="/feed" exact>
+                  {" "}
+                  Feed{" "}
+                </Link>
+              </a>
+              <a class="item" onClick={this.props.logout}>
+                <Link to="/Home">
+                  <h4 class="nav-text">Logout</h4>
+                </Link>{" "}
+              </a>
+            </>
+          ) : null}
         </div>
       </div>
     );
