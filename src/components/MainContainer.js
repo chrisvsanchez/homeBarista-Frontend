@@ -33,7 +33,12 @@ class MainContainer extends React.Component {
       })
         .then((r) => r.json())
         .then((loggedInUser) => {
+          console.log(loggedInUser, "autologin");
           this.handleLogin(loggedInUser);
+          this.setState({
+            currentUser: loggedInUser,
+            currentUsersPosts: loggedInUser.posts,
+          });
         });
     }
   }
@@ -80,18 +85,22 @@ class MainContainer extends React.Component {
         />
         <div style={{ backgroundColor: "#ddc9b4" }}>
           <Switch>
-            <Route path="/profilePage">
-              <ProfilePage
-                userPosts={this.state.currentUsersPosts}
-                currentUser={this.state.currentUser}
-                addPostToCurrentUser={this.addPostToCurrentUser}
-                deletePost={this.deletePost}
-              />
-            </Route>
-            <Route path="/Feed">
-              <UserFeedPage />
-            </Route>
-            <Route path="/Home">
+            {this.state.currentUser ? (
+              <>
+                <Route path="/profilePage">
+                  <ProfilePage
+                    userPosts={this.state.currentUsersPosts}
+                    currentUser={this.state.currentUser}
+                    addPostToCurrentUser={this.addPostToCurrentUser}
+                    deletePost={this.deletePost}
+                  />
+                </Route>
+                <Route path="/Feed">
+                  <UserFeedPage />
+                </Route>
+              </>
+            ) : null}
+            <Route path="/">
               <Home handleLogin={this.handleLogin} />
             </Route>
           </Switch>

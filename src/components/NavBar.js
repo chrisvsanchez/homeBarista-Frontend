@@ -11,33 +11,30 @@ class NavBar extends React.Component {
     const { activeItem } = this.state;
 
     return (
-      <div>
-        <div class="ui inverted menu" id="menu">
-          <a class="image">
-            <Image size={"tiny"} right floated src={MyImage} />
-          </a>
-          <a class="item active">
-            <Link to="/Home">Home</Link>
-          </a>
-          {this.props.currentUser ? (
-            <>
-              <a class="item">
-                <Link to="/profilePage">Profile Page</Link>
-              </a>
-              <a class="item">
-                <Link to="/feed" exact>
-                  {" "}
-                  Feed{" "}
-                </Link>
-              </a>
-              <a class="item" onClick={this.props.logout}>
-                <Link to="/Home">
-                  <h4 class="nav-text">Logout</h4>
-                </Link>{" "}
-              </a>
-            </>
-          ) : null}
-        </div>
+      <div class="ui inverted menu" id="menu">
+        <a class="image">
+          <Image size={"tiny"} right floated src={MyImage} />
+        </a>
+        <a class="item active">
+          <Link to="/Home">Home</Link>
+        </a>
+        {this.props.currentUser ? (
+          <>
+            <a class="item">
+              <Link to="/profilePage">Profile Page</Link>
+            </a>
+            <a class="item">
+              <Link to="/Feed" exact>
+                Feed
+              </Link>
+            </a>
+            <a class="item" onClick={this.props.logout}>
+              <Link to="/">
+                <h4 class="nav-text">Logout</h4>
+              </Link>
+            </a>
+          </>
+        ) : null}
       </div>
     );
   }

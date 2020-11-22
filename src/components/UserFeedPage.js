@@ -4,7 +4,12 @@ import PostContainer from "./PostContainer";
 
 class UserFeedPage extends React.Component {
   render() {
-    return <PostContainer />;
+    return (
+      <>
+        <h1>UserFEEDpage</h1>
+        <PostContainer />
+      </>
+    );
   }
 }
 

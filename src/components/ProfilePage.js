@@ -35,7 +35,7 @@ class ProfilePage extends React.Component {
     })
       .then((r) => r.json())
       .then((newlyCreatedPost) => {
-        console.log(newlyCreatedPost);
+        console.log(newlyCreatedPost, "newly created post");
         this.props.addPostToCurrentUser(newlyCreatedPost);
         this.setState({
           title: "",
@@ -123,6 +123,7 @@ class ProfilePage extends React.Component {
           <MyPostsContainer
             deletePost={this.props.deletePost}
             userPosts={this.props.userPosts}
+            currentUser={this.props.currentUser}
           />
         </Segment>
       </div>

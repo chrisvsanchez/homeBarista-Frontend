@@ -41,26 +41,11 @@ class FeedPost extends React.Component {
   };
   // unable to access post information
   render() {
-    console.log(this.props.user);
+    //  console.log(this.props.user);
     // debugger;
     // console.log();
     // console.log(this.handlePosts);
-    return (
-      // <Card>
-      //   <div>
-      //     <Image
-      //       floated="left"
-      //       src={this.props.user.profile_img}
-      //       size="mini"
-      //       circular
-      //       verticalAlign="middle"
-      //     />
-      //     <span>{this.props.user.name}</span>
-      //     {this.props.posts ? this.posty() : null}
-      //   </div>
-      // </Card>
-      <Card>{this.posty()}</Card>
-    );
+    return <Card>{this.posty()}</Card>;
   }
 }
 export default FeedPost;

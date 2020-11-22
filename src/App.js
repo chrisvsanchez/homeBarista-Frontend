@@ -11,14 +11,16 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div>
-      {/* <Routes> */}
-      {/* <Route></Route> */}
-      {/* <NavBar /> */}
-      <MainContainer />
+    <>
+      <div>
+        {/* <Routes> */}
+        {/* <Route></Route> */}
+        {/* <NavBar /> */}
+        <MainContainer />
+        {/* </Routes> */}
+      </div>
       <Footer />
-      {/* </Routes> */}
-    </div>
+    </>
   );
 }
 
