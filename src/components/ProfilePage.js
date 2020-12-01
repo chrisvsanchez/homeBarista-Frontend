@@ -35,13 +35,7 @@ class ProfilePage extends React.Component {
     })
       .then((r) => r.json())
       .then((newlyCreatedPost) => {
-        console.log(newlyCreatedPost, "newly created post");
-        this.props.addPostToCurrentUser(newlyCreatedPost);
-        this.setState({
-          title: "",
-          article: "",
-          image: "",
-        });
+        this.setState({});
       });
   };
   createPostForm = () => {
