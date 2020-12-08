@@ -1,13 +1,22 @@
 import React from "react";
 import MyPostsContainer from "./myPostContainer";
 import { Segment, Image, Form, Grid, Button } from "semantic-ui-react";
+// import NewItemForm from "./NewItemForm";
 
 class ProfilePage extends React.Component {
   state = {
     title: "",
     article: "",
-    image: "",
+    image: {},
     createForm: false,
+  };
+  onChange = (e) => {
+    e.persist();
+    this.setState(() => {
+      return {
+        [e.target.name]: e.target.files[0],
+      };
+    });
   };
   handleChange = (e) => {
     const target = e.target;
@@ -19,6 +28,44 @@ class ProfilePage extends React.Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
+    // const currentStateObj = {
+    //   article_text: this.state.article,
+    //   title: this.state.title,
+    //   image: this.state.image,
+    //   user_id: this.props.currentUser.id,
+    //   reviews: [],
+    // };
+    const form = new FormData();
+    form.append("image", this.state.image);
+    fetch(`http://localhost:3000/items`, {
+      method: "POST",
+      body: form,
+    })
+      .then((r) => r.json())
+      .then((imageObj) => {
+        console.log(imageObj.image);
+        this.setState(
+          {
+            image: imageObj.image,
+          },
+          () => this.createPost()
+        );
+      });
+
+    // fetch(`http://localhost:3000/posts`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(currentStateObj),
+    // })
+    //   .then((r) => r.json())
+    //   .then((newlyCreatedPost) => {
+    //     // this.setState(newlyCreatedPost);
+    //     this.props.addPostToCurrentUser(newlyCreatedPost);
+    //   });
+  };
+  createPost = () => {
     const currentStateObj = {
       article_text: this.state.article,
       title: this.state.title,
@@ -35,7 +82,8 @@ class ProfilePage extends React.Component {
     })
       .then((r) => r.json())
       .then((newlyCreatedPost) => {
-        this.setState({});
+        // this.setState(newlyCreatedPost);
+        this.props.addPostToCurrentUser(newlyCreatedPost);
       });
   };
   createPostForm = () => {
@@ -44,13 +92,13 @@ class ProfilePage extends React.Component {
         <Form onSubmit={this.submitHandler}>
           <h1>{"Create a Post!"}</h1>
           <Form.Group widths="equal">
-            <Form.Input
+            <input
               fluid
-              label="Image URL"
-              placeholder="url"
-              name="image"
-              value={this.state.image}
-              onChange={this.handleChange}
+              label="Image Upload"
+              placeholder=".png, .jpeg, ...etc"
+              name="image" // type="file" value={this.state.image}
+              onChange={this.onChange}
+              type="file"
             />
             <Form.Input
               fluid
@@ -97,6 +145,7 @@ class ProfilePage extends React.Component {
                   size="medium"
                   rounded
                 />
+                {/* <NewItemForm /> */}
               </Grid.Column>
               <Grid.Column width={9}>
                 <h3>Bio</h3>
