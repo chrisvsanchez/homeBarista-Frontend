@@ -9,6 +9,9 @@ class MainContainer extends React.Component {
     currentUsersPosts: [],
     currentUser: null,
   };
+  updateProfilePic = (newPhoto) => {
+    console.log("MainContainer Photo joint", newPhoto);
+  };
   handleLogin = (currentUser) => {
     this.setState({ currentUser }, () => {
       this.props.history.push("/profilePage");
@@ -93,6 +96,7 @@ class MainContainer extends React.Component {
                     currentUser={this.state.currentUser}
                     addPostToCurrentUser={this.addPostToCurrentUser}
                     deletePost={this.deletePost}
+                    updateProfilePic={this.updateProfilePic}
                   />
                 </Route>
                 <Route path="/Feed">

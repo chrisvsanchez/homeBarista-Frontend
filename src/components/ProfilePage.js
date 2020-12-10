@@ -1,6 +1,7 @@
 import React from "react";
 import MyPostsContainer from "./myPostContainer";
-import { Segment, Image, Form, Grid, Button } from "semantic-ui-react";
+import { Segment, Image, Form, Grid, Button, Icon } from "semantic-ui-react";
+import ProfileSideBar from "./ProfileSideBar";
 // import NewItemForm from "./NewItemForm";
 
 class ProfilePage extends React.Component {
@@ -8,10 +9,13 @@ class ProfilePage extends React.Component {
     title: "",
     article: "",
     image: {},
+    profilePicture: {},
     createForm: false,
+    uploadPhoto: false,
   };
   onChange = (e) => {
     e.persist();
+
     this.setState(() => {
       return {
         [e.target.name]: e.target.files[0],
@@ -26,15 +30,48 @@ class ProfilePage extends React.Component {
       [name]: value,
     });
   };
+  uploadNewProfilePic = (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    form.append("image", this.state.profilePicture);
+    fetch(`http://localhost:3000/items`, {
+      method: "POST",
+      body: form,
+    })
+      .then((r) => r.json())
+      .then((imageObj) => {
+        console.log(imageObj);
+        this.setState(
+          {
+            profilePicture: imageObj.profilePicture,
+          },
+          () => this.props.updateProfilePic(this.state.profilePicture)
+        );
+      });
+  };
+  toggleUploadPhoto = () => {
+    this.setState({
+      uploadPhoto: !this.state.uploadPhoto,
+    });
+    return this.createUploadProfilePicForm();
+  };
+  createUploadProfilePicForm = () => {
+    return (
+      <Segment>
+        <Form className="form" onSubmit={this.uploadNewProfilePic}>
+          <Form.Input
+            label="Upload new Profile picture"
+            name="profilePicture"
+            onChange={this.onChange}
+            type="file"
+          />
+          <Form.Button type="submit">Submit</Form.Button>
+        </Form>
+      </Segment>
+    );
+  };
   submitHandler = (e) => {
     e.preventDefault();
-    // const currentStateObj = {
-    //   article_text: this.state.article,
-    //   title: this.state.title,
-    //   image: this.state.image,
-    //   user_id: this.props.currentUser.id,
-    //   reviews: [],
-    // };
     const form = new FormData();
     form.append("image", this.state.image);
     fetch(`http://localhost:3000/items`, {
@@ -51,19 +88,6 @@ class ProfilePage extends React.Component {
           () => this.createPost()
         );
       });
-
-    // fetch(`http://localhost:3000/posts`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(currentStateObj),
-    // })
-    //   .then((r) => r.json())
-    //   .then((newlyCreatedPost) => {
-    //     // this.setState(newlyCreatedPost);
-    //     this.props.addPostToCurrentUser(newlyCreatedPost);
-    //   });
   };
   createPost = () => {
     const currentStateObj = {
@@ -92,14 +116,14 @@ class ProfilePage extends React.Component {
         <Form onSubmit={this.submitHandler}>
           <h1>{"Create a Post!"}</h1>
           <Form.Group widths="equal">
-            <input
+            <Form.Input
               fluid
-              label="Image Upload"
-              placeholder=".png, .jpeg, ...etc"
+              label="Upload Image"
               name="image" // type="file" value={this.state.image}
               onChange={this.onChange}
               type="file"
             />
+
             <Form.Input
               fluid
               label="Title"
@@ -131,10 +155,8 @@ class ProfilePage extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: "#ddc9b4" }}>
-        {/* <h2>Welcome Back {this.props.userObj.name}!</h2> */}
-
         {this.state.createForm ? this.createPostForm() : null}
-
+        {this.state.uploadPhoto ? this.createUploadProfilePicForm() : null}
         <Segment style={{ backgroundColor: "#ddc9b4" }}>
           <Segment>
             <Grid>
@@ -155,11 +177,15 @@ class ProfilePage extends React.Component {
                 <h5>Coffee Medium</h5>
                 <span>{this.props.currentUser.coffee_medium}</span>
               </Grid.Column>
-              <Grid.Column>
-                <Button class="ui basic button" onClick={this.handleForm}>
+              <Grid.Column width={2}>
+                {/* <Button class="ui basic button" onClick={this.handleForm}>
                   <i class="coffee"></i>
                   Create Post
-                </Button>
+                </Button> */}
+                <ProfileSideBar
+                  createPost={this.handleForm}
+                  toggleUploadPhoto={this.toggleUploadPhoto}
+                />
               </Grid.Column>
             </Grid>
           </Segment>
