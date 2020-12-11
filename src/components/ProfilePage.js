@@ -40,12 +40,12 @@ class ProfilePage extends React.Component {
     })
       .then((r) => r.json())
       .then((imageObj) => {
-        console.log(imageObj);
+        console.log(imageObj, imageObj);
         this.setState(
           {
-            profilePicture: imageObj.profilePicture,
+            profilePicture: imageObj.image,
           },
-          () => this.props.updateProfilePic(this.state.profilePicture)
+          () => this.props.updateProfilePic(imageObj.image)
         );
       });
   };

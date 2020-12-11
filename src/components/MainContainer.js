@@ -8,9 +8,30 @@ class MainContainer extends React.Component {
   state = {
     currentUsersPosts: [],
     currentUser: null,
+    new_profile_img: "",
   };
   updateProfilePic = (newPhoto) => {
-    console.log("MainContainer Photo joint", newPhoto);
+    console.log(newPhoto);
+    this.setState({
+      new_profile_img: newPhoto,
+    });
+    let updatedProfilePic = newPhoto;
+    fetch(`http://localhost:3000/ProfilePicture`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+      body: JSON.stringify({
+        photo: updatedProfilePic,
+      }),
+    })
+      .then((r) => r.json())
+      .then((updatedPhotoUserObject) =>
+        this.setState({
+          currentUser: updatedPhotoUserObject,
+        })
+      );
   };
   handleLogin = (currentUser) => {
     this.setState({ currentUser }, () => {

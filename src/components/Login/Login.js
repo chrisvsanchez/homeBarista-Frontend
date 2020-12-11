@@ -12,7 +12,7 @@ class Login extends React.Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("yooo");
+
     fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
