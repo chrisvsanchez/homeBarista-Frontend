@@ -4,34 +4,14 @@ import Home from "./Home";
 import { Switch, Route, withRouter } from "react-router-dom";
 import UserFeedPage from "./UserFeedPage";
 import NavBar from "./NavBar";
+import ProfileContainer from "./SearchBaristas/ProfileContainer";
 class MainContainer extends React.Component {
   state = {
     currentUsersPosts: [],
     currentUser: null,
-    new_profile_img: "",
   };
   updateProfilePic = (newPhoto) => {
-    console.log(newPhoto);
-    this.setState({
-      new_profile_img: newPhoto,
-    });
-    let updatedProfilePic = newPhoto;
-    fetch(`http://localhost:3000/ProfilePicture`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${localStorage.token}`,
-      },
-      body: JSON.stringify({
-        photo: updatedProfilePic,
-      }),
-    })
-      .then((r) => r.json())
-      .then((updatedPhotoUserObject) =>
-        this.setState({
-          currentUser: updatedPhotoUserObject,
-        })
-      );
+    console.log("MainContainer Photo joint", newPhoto);
   };
   handleLogin = (currentUser) => {
     this.setState({ currentUser }, () => {
@@ -122,6 +102,9 @@ class MainContainer extends React.Component {
                 </Route>
                 <Route path="/Feed">
                   <UserFeedPage />
+                </Route>
+                <Route path="/Find">
+                  <ProfileContainer />
                 </Route>
               </>
             ) : null}

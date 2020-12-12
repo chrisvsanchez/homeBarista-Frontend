@@ -1,6 +1,6 @@
 import React from "react";
 import MyPostsContainer from "./myPostContainer";
-import { Segment, Image, Form, Grid, Button, Icon } from "semantic-ui-react";
+import { Segment, Image, Form, Grid } from "semantic-ui-react";
 import ProfileSideBar from "./ProfileSideBar";
 // import NewItemForm from "./NewItemForm";
 
