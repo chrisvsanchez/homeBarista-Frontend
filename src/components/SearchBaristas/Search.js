@@ -8,6 +8,7 @@ class Search extends React.Component {
     this.setState({
       userInput: e.target.value,
     });
+    this.props.handleInput(this.state.userInput);
   };
   render() {
     return (

@@ -16,16 +16,20 @@ class ProfileContainer extends React.Component {
         });
       });
   }
-  // filterProfiles = (userInput) => {
-  //   return this.state.allUsers.filter((user) => {
-  //     return user.current_coffee_beans.includes(userInput);
-  //   });
-  // };
+
+  handleInput = (keyword) => {
+    this.setState({
+      userInput: keyword,
+    });
+  };
   render() {
     return (
       <>
-        <Search />
-        <ProfileCards allUsers={this.state.allUsers} />
+        <Search handleInput={this.handleInput} />
+        <ProfileCards
+          allUsers={this.state.allUsers}
+          keyword={this.state.userInput}
+        />
       </>
     );
   }
