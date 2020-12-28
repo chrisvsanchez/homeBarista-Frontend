@@ -4,7 +4,7 @@ import ProfileCards from "./ProfileCards";
 class ProfileContainer extends React.Component {
   state = {
     userInput: "",
-    allUsers: {},
+    allUsers: [],
   };
   componentDidMount() {
     fetch("http://localhost:3000/users")
@@ -16,6 +16,11 @@ class ProfileContainer extends React.Component {
         });
       });
   }
+  // filterProfiles = (userInput) => {
+  //   return this.state.allUsers.filter((user) => {
+  //     return user.current_coffee_beans.includes(userInput);
+  //   });
+  // };
   render() {
     return (
       <>
