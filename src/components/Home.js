@@ -1,11 +1,34 @@
 import React from "react";
-
+import SignUp from "./SignUp";
 import Login from "./Login/Login";
-function Home(props) {
-  return (
-    <div>
-      <Login handleLogin={props.handleLogin} />
-    </div>
-  );
+class Home extends React.Component {
+  state = {
+    loginForm: true,
+    signUpForm: false,
+  };
+  toggleForm = () => {
+    this.setState({
+      loginForm: !this.state.loginForm,
+      signUpForm: !this.state.signUpForm,
+    });
+  };
+  render() {
+    return (
+      <div className="home">
+        {this.state.loginForm ? (
+          <Login
+            handleLogin={this.props.handleLogin}
+            toggleForm={this.toggleForm}
+          />
+        ) : null}
+        {this.state.signUpForm ? (
+          <SignUp
+            handleLogin={this.props.handleLogin}
+            toggleForm={this.toggleForm}
+          />
+        ) : null}
+      </div>
+    );
+  }
 }
 export default Home;

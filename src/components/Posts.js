@@ -1,12 +1,11 @@
 import React from "react";
-import { Card, Image, Button, Icon, Segment } from "semantic-ui-react";
+import { Card, Image, Button, Icon } from "semantic-ui-react";
 
 class Post extends React.Component {
   handleClickDelete = (e) => {
     this.props.deletePost(this.props.post.id);
   };
   render() {
-    // console.log(this.props);
     return (
       <Card style={{ backgroundColor: "#DDC9B4" }}>
         <div>

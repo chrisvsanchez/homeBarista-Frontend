@@ -5,7 +5,6 @@ import {
   Image,
   Segment,
   Button,
-  GridColumn,
   Form,
   TextArea,
 } from "semantic-ui-react";
@@ -57,9 +56,7 @@ class FeedPost extends React.Component {
     })
       .then((r) => r.json())
       .then((newlyCreatedPost) => {
-        this.setState({
-          
-        });
+        this.setState({});
       });
   };
   showComments = (reviews) => {

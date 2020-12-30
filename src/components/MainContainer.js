@@ -5,6 +5,7 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import UserFeedPage from "./UserFeedPage";
 import NavBar from "./NavBar";
 import ProfileContainer from "./SearchBaristas/ProfileContainer";
+import BaristaShowPage from "./SearchBaristas/BaristaShowPage";
 class MainContainer extends React.Component {
   state = {
     currentUsersPosts: [],
@@ -37,7 +38,6 @@ class MainContainer extends React.Component {
       })
         .then((r) => r.json())
         .then((loggedInUser) => {
-          console.log(loggedInUser, "autologin");
           this.handleLogin(loggedInUser);
           this.setState({
             currentUser: loggedInUser,
@@ -46,17 +46,7 @@ class MainContainer extends React.Component {
         });
     }
   }
-  // componentDidMount() {
-  //   fetch(`http://localhost:3000/users/${this.state.currentUser}`)
-  //     .then((r) => r.json())
-  //     .then((UserObj) => {
-  //       // console.log(UserObj)
-  //       this.setState({
-  //         currentUser: UserObj,
-  //         currentUsersPosts: UserObj.posts,
-  //       });
-  //     });
-  // }
+
   addPostToCurrentUser = (newPostObj) => {
     const newPost = [newPostObj, ...this.state.currentUsersPosts];
     this.setState({
@@ -103,6 +93,10 @@ class MainContainer extends React.Component {
                 <Route path="/Feed">
                   <UserFeedPage />
                 </Route>
+                <Route
+                  path="/baristashowpage/:id"
+                  render={(props) => <BaristaShowPage {...props} />}
+                />
                 <Route path="/Find">
                   <ProfileContainer />
                 </Route>

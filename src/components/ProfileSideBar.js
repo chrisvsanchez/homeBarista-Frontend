@@ -21,18 +21,18 @@ const ProfileSideBar = (props) => (
         <Icon name="cloud upload" />
         Upload Profile Pic
       </Menu.Item>
-      <Menu.Item as="a">
-        <Link to="/Feed" exact>
+      <Link to="/Feed">
+        <Menu.Item>
           <Icon name="feed" />
           Feed
-        </Link>
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Link to="/Find">
+        </Menu.Item>
+      </Link>
+      <Link to="/Find">
+        <Menu.Item>
           <Icon name="find" />
           Find Baristas
-        </Link>
-      </Menu.Item>
+        </Menu.Item>
+      </Link>
     </Sidebar>
 
     <Sidebar.Pusher>

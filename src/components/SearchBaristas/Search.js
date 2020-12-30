@@ -14,12 +14,12 @@ class Search extends React.Component {
     return (
       <>
         <div className="ui search">
-          <div className="ui icon input">
+          <div className="ui icon input" style={{ width: "50%" }}>
             <input
+              className="search-input"
               onChange={this.handleChange}
               value={this.state.userInput}
               placeholder={"Search"}
-              className="prompt"
               name="search"
             />
             <i className="search icon" />

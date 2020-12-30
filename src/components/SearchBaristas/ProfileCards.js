@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Icon, Image } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 // import CardTemplate from "./CardTemplate";
 class ProfileCard extends React.Component {
   turnToCard = () => {
@@ -16,35 +17,37 @@ class ProfileCard extends React.Component {
       .map((user) => {
         // return this.props.allUsers.map((user) => {
         return (
-          <Card key={user.id}>
-            <Image src={user.profile_img} wrapped ui={false} />
-            <Card.Content>
-              <Card.Header>{user.name}</Card.Header>
-              <Card.Meta>
-                <span className="date">
-                  <strong>Coffee Medium: </strong>
-                  {user.coffee_medium}
-                </span>
-              </Card.Meta>
-              <Card.Description>
-                <strong>Favorite Blend: </strong>
-                {user.current_coffee_beans}
-              </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-              <a>
+          <Link to={`/baristashowpage/${user.id}`}>
+            <Card key={user.id}>
+              <Image size={"small"} src={user.profile_img} wrapped ui={false} />
+              <Card.Content>
+                <Card.Header>{user.name}</Card.Header>
+                <Card.Meta>
+                  <span className="date">
+                    <strong>Coffee Medium: </strong>
+                    {user.coffee_medium}
+                  </span>
+                </Card.Meta>
+                <Card.Description>
+                  <strong>Favorite Blend: </strong>
+                  {user.current_coffee_beans}
+                </Card.Description>
+              </Card.Content>
+              <Card.Content extra>
                 <Icon name="pencil" />
                 {user.posts.length} Posts
-              </a>
-            </Card.Content>
-          </Card>
+              </Card.Content>
+            </Card>
+          </Link>
         );
       });
   };
   render() {
     return (
-      <div>
-        <Card.Group itemsPerRow={6}>{this.turnToCard()}</Card.Group>
+      <div className="profiles-container">
+        <Card.Group centered itemsPerRow={6}>
+          {this.turnToCard()}
+        </Card.Group>
       </div>
     );
   }

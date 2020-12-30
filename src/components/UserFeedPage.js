@@ -6,7 +6,7 @@ class UserFeedPage extends React.Component {
   render() {
     return (
       <>
-        <h1>UserFEEDpage</h1>
+        <h1 style={{ textAlign: "center" }}>Feed</h1>
         <PostContainer />
       </>
     );

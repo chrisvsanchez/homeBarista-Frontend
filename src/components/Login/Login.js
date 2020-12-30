@@ -39,8 +39,7 @@ class Login extends React.Component {
           </div>
           <div className="form">
             <Form
-              size="medium"
-              textAlign="center"
+              size="large"
               inverted
               className="form-group"
               onSubmit={this.handleSubmit}
@@ -84,6 +83,7 @@ class Login extends React.Component {
               </Button>
             </Form>
           </div>
+          <button onClick={this.props.toggleForm}>Create an Account</button>
         </div>
       </div>
     );
