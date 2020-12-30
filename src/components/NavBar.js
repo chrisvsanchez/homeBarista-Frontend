@@ -13,7 +13,7 @@ class NavBar extends React.Component {
     return (
       <div className="ui inverted menu" id="menu" style={{ margin: "0rem " }}>
         <Image className="image" size={"tiny"} right="true" src={MyImage} />
-        <Link className="item" to="/Home">
+        <Link className="item" to="/home">
           Home
         </Link>
         {this.props.currentUser ? (
@@ -26,7 +26,7 @@ class NavBar extends React.Component {
               Feed
             </Link>
 
-            <Link className="item" to="/" onClick={this.props.logout}>
+            <Link className="item" to="/home" onClick={this.props.logout}>
               Logout
             </Link>
           </>

@@ -6,6 +6,7 @@ import UserFeedPage from "./UserFeedPage";
 import NavBar from "./NavBar";
 import ProfileContainer from "./SearchBaristas/ProfileContainer";
 import BaristaShowPage from "./SearchBaristas/BaristaShowPage";
+
 class MainContainer extends React.Component {
   state = {
     currentUsersPosts: [],
@@ -102,8 +103,11 @@ class MainContainer extends React.Component {
                 </Route>
               </>
             ) : null}
-            <Route path="/">
-              <Home handleLogin={this.handleLogin} />
+            <Route path="/home">
+              <Home
+                currentUser={this.state.currentUser}
+                handleLogin={this.handleLogin}
+              />
             </Route>
           </Switch>
         </div>

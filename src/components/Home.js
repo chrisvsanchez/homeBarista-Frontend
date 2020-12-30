@@ -14,20 +14,26 @@ class Home extends React.Component {
   };
   render() {
     return (
-      <div className="home">
-        {this.state.loginForm ? (
-          <Login
-            handleLogin={this.props.handleLogin}
-            toggleForm={this.toggleForm}
-          />
-        ) : null}
-        {this.state.signUpForm ? (
-          <SignUp
-            handleLogin={this.props.handleLogin}
-            toggleForm={this.toggleForm}
-          />
-        ) : null}
-      </div>
+      <>
+        <div className="home">
+          {!this.props.currentUser ? (
+            <>
+              {this.state.loginForm ? (
+                <Login
+                  handleLogin={this.props.handleLogin}
+                  toggleForm={this.toggleForm}
+                />
+              ) : null}
+              {this.state.signUpForm ? (
+                <SignUp
+                  handleLogin={this.props.handleLogin}
+                  toggleForm={this.toggleForm}
+                />
+              ) : null}
+            </>
+          ) : null}
+        </div>
+      </>
     );
   }
 }

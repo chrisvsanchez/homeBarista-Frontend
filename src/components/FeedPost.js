@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Grid,
-  Card,
+  // Card,
   Image,
   Segment,
   Button,
@@ -121,7 +121,7 @@ class FeedPost extends React.Component {
   };
 
   render() {
-    return <Card>{this.posty()}</Card>;
+    return <>{this.posty()}</>;
   }
 }
 export default FeedPost;

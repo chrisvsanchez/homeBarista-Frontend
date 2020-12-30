@@ -136,7 +136,7 @@ class SignUp extends React.Component {
               </Form>
             </div>
           </div>
-          <button onClick={this.props.toggleForm}>Sign up</button>
+          <button onClick={this.props.toggleForm}>Log in</button>
         </div>
       </div>
     );

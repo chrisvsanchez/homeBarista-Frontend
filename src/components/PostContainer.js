@@ -30,7 +30,9 @@ class PostContainer extends React.Component {
   render() {
     return (
       <>
-        <Card.Group itemsPerRow={1}>{this.turnToPostFeed()}</Card.Group>
+        <Card.Group className="post-feed-container" itemsPerRow={1}>
+          {this.turnToPostFeed()}
+        </Card.Group>
       </>
     );
   }
