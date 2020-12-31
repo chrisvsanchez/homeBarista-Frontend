@@ -10,7 +10,7 @@ class ProfileContainer extends React.Component {
     fetch("http://localhost:3000/users")
       .then((r) => r.json())
       .then((userObjs) => {
-        console.log(userObjs, "searchPage");
+        // console.log(userObjs, "searchPage");
         this.setState({
           allUsers: userObjs,
         });

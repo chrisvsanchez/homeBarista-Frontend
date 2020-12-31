@@ -17,8 +17,8 @@ class ProfileCard extends React.Component {
       .map((user) => {
         // return this.props.allUsers.map((user) => {
         return (
-          <Link to={`/baristashowpage/${user.id}`}>
-            <Card key={user.id}>
+          <Link key={user.id} to={`/baristashowpage/${user.id}`}>
+            <Card>
               <Image size={"small"} src={user.profile_img} wrapped ui={false} />
               <Card.Content>
                 <Card.Header>{user.name}</Card.Header>

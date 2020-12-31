@@ -21,20 +21,8 @@ class Post extends React.Component {
               <Icon name="delete" />
             </Button.Content>
           </Button>
-          {/* <Button animated onClick={"hello"}>
-            <Button.Content visible>Comments</Button.Content>
-            <Button.Content hidden>
-              <Icon name="Comments" />
-            </Button.Content>
-          </Button> */}
 
-          <Image
-            src={this.props.post.image}
-            as="a"
-            size="medium"
-            // href='http://google.com'
-            // target='_blank'
-          />
+          <Image src={this.props.post.image} as="a" size="medium" />
           <div>
             <h3>{this.props.post.title}</h3>
             <p>{this.props.post.article_text}</p>

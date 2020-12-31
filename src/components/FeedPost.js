@@ -16,8 +16,9 @@ class FeedPost extends React.Component {
     currentUser: null,
     currentPost: null,
     newComment: "",
+    currentPostId: 0,
   };
-  // createComment = () => {};
+
   toggleComments = () => {
     this.setState({
       viewComments: !this.state.viewComments,
@@ -28,16 +29,22 @@ class FeedPost extends React.Component {
       writeComment: !this.state.writeComment,
     });
   };
-  handleCommentText = () => {};
-  createCommentForm = () => {
+  setCommentText = (postID) => {
+    this.setState({
+      currentPostId: postID,
+    });
+  };
+  createCommentForm = (postID) => {
     return (
-      <Form onSubmit={this.onSubmitComment}>
-        <TextArea
-          placeholder="Write comment here..."
-          onChange={this.handleCommentText}
-        ></TextArea>
-        <Button size="small">Submit</Button>
-      </Form>
+      <>
+        <Form onSubmit={(this.onSubmitComment(e), this.setCommentText(postID))}>
+          <TextArea
+            placeholder="Write comment here..."
+            onChange={this.handleCommentText}
+          ></TextArea>
+          <Button size="small">Submit</Button>
+        </Form>
+      </>
     );
   };
   onSubmitComment = (e) => {
@@ -45,7 +52,7 @@ class FeedPost extends React.Component {
 
     let reviewObj = {
       user_id: this.state.user_id,
-      post_id: this.state.currentPost.id,
+      post_id: this.state.postID,
     };
     fetch("http://localhost:3000/reviews", {
       method: "POST",
@@ -115,7 +122,7 @@ class FeedPost extends React.Component {
             {this.showComments(post.reviews)}
           </div>
         ) : null}
-        {this.state.writeComment ? this.createCommentForm() : null}
+        {this.state.writeComment ? this.createCommentForm(post.id) : null}
       </Segment>
     ));
   };

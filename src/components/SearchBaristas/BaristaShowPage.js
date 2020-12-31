@@ -1,18 +1,31 @@
 import React from "react";
-import { Grid, GridColumn, Image, Segment, Header } from "semantic-ui-react";
-
+import { Grid, Image, Header, Divider, Card } from "semantic-ui-react";
+import CardTemplate from "../CardTemplate";
 class BaristaShowPage extends React.Component {
   state = {
     currentBarista: [],
+    currentPosts: [],
+  };
+  turnPostsToCards = () => {
+    return this.state.currentPosts.map((post) => (
+      <CardTemplate
+        id={post.id}
+        post={post}
+        image={post.image}
+        title={post.title}
+        article_text={post.article_text}
+      />
+    ));
   };
 
   componentDidMount() {
     fetch(`http://localhost:3000/users/${this.props.match.params.id}`)
       .then((r) => r.json())
       .then((currentUser) => {
-        console.log("this", currentUser);
+        // console.log("this", currentUser);
         this.setState({
           currentBarista: currentUser,
+          currentPosts: currentUser.posts,
         });
       });
   }
@@ -23,29 +36,37 @@ class BaristaShowPage extends React.Component {
       profile_img,
       coffee_medium,
       current_coffee_beans,
-      posts,
-      reviews,
     } = this.state.currentBarista;
     return (
       <div className="barista-show-container">
-        <h1>BaristaPAGE </h1>
-        <Grid columns="equal">
-          <Grid.Row centered>
-            <Image circular src={profile_img}></Image>
-            <Header as="h2">{name}</Header>
-          </Grid.Row>
+        <Grid centered columns={1}>
           <Grid.Row>
-            <GridColumn>
-              <Segment>1</Segment>
-            </GridColumn>
             <Grid.Column>
-              <Segment>2</Segment>
-            </Grid.Column>
-            <Grid.Column>
-              <Segment>3</Segment>
+              <Image centered circular size="small" src={profile_img}></Image>
+              <Header textAlign="center" as="h2">
+                {name}
+              </Header>
+
+              <Header as="h5" textAlign="center">
+                <b>Coffee Medium: </b>
+                {coffee_medium}
+              </Header>
+              <Header as="h5" textAlign="center">
+                {current_coffee_beans}
+              </Header>
+              <Header as="h5" textAlign="center">
+                {bio}
+              </Header>
             </Grid.Column>
           </Grid.Row>
+          <Divider />
+          <Divider />
         </Grid>
+        <Header as="h1" textAlign="center">
+          {name}'s Posts
+        </Header>
+
+        <Card.Group itemsPerRow={2}>{this.turnPostsToCards()}</Card.Group>
       </div>
     );
   }

@@ -19,7 +19,7 @@ class NavBar extends React.Component {
         {this.props.currentUser ? (
           <>
             <Link className="item" to="/profilePage">
-              Profile Page
+              Profile
             </Link>
 
             <Link className="item" to="/Feed">
