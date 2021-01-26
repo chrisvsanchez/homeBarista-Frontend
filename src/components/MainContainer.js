@@ -11,6 +11,7 @@ class MainContainer extends React.Component {
   state = {
     currentUsersPosts: [],
     currentUser: null,
+    feed: [],
   };
   updateProfilePic = (newPhoto) => {
     console.log("MainContainer Photo joint", newPhoto);
@@ -32,7 +33,7 @@ class MainContainer extends React.Component {
   };
   componentDidMount() {
     if (localStorage.token) {
-      fetch(`http://localhost:3000/autologin`, {
+      fetch(`https://home-barista-api.herokuapp.com/autologin`, {
         headers: {
           Authorization: `Bearer ${localStorage.token}`,
         },
@@ -46,6 +47,14 @@ class MainContainer extends React.Component {
           });
         });
     }
+    fetch("https://home-barista-api.herokuapp.com/feeds")
+      .then((r) => r.json())
+      .then((feedObjs) => {
+        console.log(feedObjs);
+        this.setState({
+          feed: feedObjs,
+        });
+      });
   }
 
   addPostToCurrentUser = (newPostObj) => {
@@ -56,7 +65,7 @@ class MainContainer extends React.Component {
   };
   deletePost = (childId) => {
     console.log(childId);
-    fetch(`http://localhost:3000/posts/${childId}`, {
+    fetch(`https://home-barista-api.herokuapp.com/posts/${childId}`, {
       method: "DELETE",
     })
       .then((r) => r.json())
@@ -89,10 +98,11 @@ class MainContainer extends React.Component {
                     addPostToCurrentUser={this.addPostToCurrentUser}
                     deletePost={this.deletePost}
                     updateProfilePic={this.updateProfilePic}
+                    updateFeedObj={this.updateFeedObj}
                   />
                 </Route>
                 <Route path="/Feed">
-                  <UserFeedPage />
+                  <UserFeedPage feed={this.state.feed} />
                 </Route>
                 <Route
                   path="/baristashowpage/:id"

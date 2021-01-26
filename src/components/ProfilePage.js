@@ -34,7 +34,7 @@ class ProfilePage extends React.Component {
     e.preventDefault();
     const form = new FormData();
     form.append("image", this.state.profilePicture);
-    fetch(`http://localhost:3000/items`, {
+    fetch(`https://home-barista-api.herokuapp.com/items`, {
       method: "POST",
       body: form,
     })
@@ -74,13 +74,13 @@ class ProfilePage extends React.Component {
     e.preventDefault();
     const form = new FormData();
     form.append("image", this.state.image);
-    fetch(`http://localhost:3000/items`, {
+    fetch(`https://home-barista-api.herokuapp.com/items`, {
       method: "POST",
       body: form,
     })
       .then((r) => r.json())
       .then((imageObj) => {
-        console.log(imageObj.image);
+        // console.log(imageObj.image);
         this.setState(
           {
             image: imageObj.image,
@@ -97,7 +97,7 @@ class ProfilePage extends React.Component {
       user_id: this.props.currentUser.id,
       reviews: [],
     };
-    fetch(`http://localhost:3000/posts`, {
+    fetch(`https://home-barista-api.herokuapp.com/posts`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -178,10 +178,6 @@ class ProfilePage extends React.Component {
                 <span>{this.props.currentUser.coffee_medium}</span>
               </Grid.Column>
               <Grid.Column width={2}>
-                {/* <Button class="ui basic button" onClick={this.handleForm}>
-                  <i class="coffee"></i>
-                  Create Post
-                </Button> */}
                 <ProfileSideBar
                   createPost={this.handleForm}
                   toggleUploadPhoto={this.toggleUploadPhoto}
@@ -190,6 +186,7 @@ class ProfilePage extends React.Component {
             </Grid>
           </Segment>
           <MyPostsContainer
+            updateFeedObj={this.props.updateFeedObj}
             deletePost={this.props.deletePost}
             userPosts={this.props.userPosts}
             currentUser={this.props.currentUser}

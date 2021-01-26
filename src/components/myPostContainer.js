@@ -3,7 +3,7 @@ import Posts from "./Posts";
 import { Card } from "semantic-ui-react";
 class MyPostsContainer extends React.Component {
   turnToPost = () => {
-    return this.props.userPosts.map((post) => (
+    return this.props.currentUser.posts.map((post) => (
       <Posts key={post.id} post={post} deletePost={this.props.deletePost} />
     ));
   };

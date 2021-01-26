@@ -6,18 +6,8 @@ class PostContainer extends React.Component {
     feed: [],
   };
 
-  componentDidMount() {
-    fetch("http://localhost:3000/feeds")
-      .then((r) => r.json())
-      .then((feedObjs) => {
-        console.log(feedObjs);
-        this.setState({
-          feed: feedObjs,
-        });
-      });
-  }
   turnToPostFeed = () => {
-    return this.state.feed.map((feed) => (
+    return this.props.feed.map((feed) => (
       <FeedPost
         key={feed.id}
         user={feed.user}

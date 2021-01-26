@@ -7,7 +7,7 @@ class ProfileContainer extends React.Component {
     allUsers: [],
   };
   componentDidMount() {
-    fetch("http://localhost:3000/users")
+    fetch("https://home-barista-api.herokuapp.com/users")
       .then((r) => r.json())
       .then((userObjs) => {
         // console.log(userObjs, "searchPage");
@@ -24,13 +24,13 @@ class ProfileContainer extends React.Component {
   };
   render() {
     return (
-      <>
+      <div className="profile-container">
         <Search handleInput={this.handleInput} />
         <ProfileCards
           allUsers={this.state.allUsers}
           keyword={this.state.userInput}
         />
-      </>
+      </div>
     );
   }
 }

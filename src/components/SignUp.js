@@ -23,7 +23,7 @@ class SignUp extends React.Component {
       currentCoffeeBeans: this.state.currentCoffeeBeans,
       coffeeMedium: this.state.coffeeMedium,
     };
-    fetch("http://localhost:3000/signup", {
+    fetch("https://home-barista-api.herokuapp.com/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -143,11 +143,3 @@ class SignUp extends React.Component {
   }
 }
 export default SignUp;
-
-// t.string "bio" X
-// t.string "name"
-// t.string "email"
-// t.string "password_digest"
-// t.string "current_coffee_beans"
-// t.string "coffee_medium"
-// t.string "profile_img"

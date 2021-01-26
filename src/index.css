@@ -34,9 +34,9 @@ code {
 }
 
 .search-input {
+  padding: 2%;
   width: 400px;
-  margin: 0 auto;
-  display: inline-block;
+  margin: 0;
 }
 .feed {
   background-color: dark-beige;
@@ -45,5 +45,10 @@ code {
   padding: 3%;
 }
 .barista-show-container {
-  padding: 3%;
+  padding: 4%;
+}
+.profile-container {
+  width: fit-content;
+  height: fit-content;
+  padding: 5%;
 }

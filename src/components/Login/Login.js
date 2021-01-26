@@ -13,7 +13,7 @@ class Login extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/login", {
+    fetch("https://home-barista-api.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,11 +22,15 @@ class Login extends React.Component {
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
-        const { user, token } = data;
+        if (data.token) {
+          console.log(data);
+          const { user, token } = data;
 
-        this.props.handleLogin(user);
-        localStorage.token = token;
+          this.props.handleLogin(user);
+          localStorage.token = token;
+        } else {
+          alert(data.message);
+        }
       });
   };
   render() {

@@ -8,7 +8,7 @@ class UserFeedPage extends React.Component {
       <>
         <div className="feed">
           <h1 style={{ textAlign: "center" }}>Feed</h1>
-          <PostContainer />
+          <PostContainer feed={this.props.feed} />
         </div>
       </>
     );

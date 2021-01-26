@@ -19,7 +19,7 @@ export default class NewItemForm extends React.Component {
     const form = new FormData();
     form.append("image", this.state.image);
 
-    fetch(`http://localhost:3000/items`, {
+    fetch(`https://home-barista-api.herokuapp.com/items`, {
       method: "POST",
       body: form,
     })

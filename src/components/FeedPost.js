@@ -29,15 +29,11 @@ class FeedPost extends React.Component {
       writeComment: !this.state.writeComment,
     });
   };
-  setCommentText = (postID) => {
-    this.setState({
-      currentPostId: postID,
-    });
-  };
-  createCommentForm = (postID) => {
+
+  createCommentForm = () => {
     return (
       <>
-        <Form onSubmit={(this.onSubmitComment(e), this.setCommentText(postID))}>
+        <Form onSubmit={this.onSubmitComment}>
           <TextArea
             placeholder="Write comment here..."
             onChange={this.handleCommentText}
@@ -52,9 +48,9 @@ class FeedPost extends React.Component {
 
     let reviewObj = {
       user_id: this.state.user_id,
-      post_id: this.state.postID,
+      // post_id: this.state.postID,
     };
-    fetch("http://localhost:3000/reviews", {
+    fetch("https://home-barista-api.herokuapp.com/reviews", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -62,8 +58,8 @@ class FeedPost extends React.Component {
       body: JSON.stringify(reviewObj),
     })
       .then((r) => r.json())
-      .then((newlyCreatedPost) => {
-        this.setState({});
+      .then((reviewObj) => {
+        // this.setState({});
       });
   };
   showComments = (reviews) => {
@@ -122,7 +118,7 @@ class FeedPost extends React.Component {
             {this.showComments(post.reviews)}
           </div>
         ) : null}
-        {this.state.writeComment ? this.createCommentForm(post.id) : null}
+        {this.state.writeComment ? this.createCommentForm() : null}
       </Segment>
     ));
   };

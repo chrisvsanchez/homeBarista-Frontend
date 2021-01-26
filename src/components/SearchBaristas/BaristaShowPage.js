@@ -19,7 +19,9 @@ class BaristaShowPage extends React.Component {
   };
 
   componentDidMount() {
-    fetch(`http://localhost:3000/users/${this.props.match.params.id}`)
+    fetch(
+      `https://home-barista-api.herokuapp.com/users/${this.props.match.params.id}`
+    )
       .then((r) => r.json())
       .then((currentUser) => {
         // console.log("this", currentUser);
