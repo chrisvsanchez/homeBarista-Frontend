@@ -50,7 +50,7 @@ class MainContainer extends React.Component {
     fetch("https://home-barista-api.herokuapp.com/feeds")
       .then((r) => r.json())
       .then((feedObjs) => {
-        console.log(feedObjs);
+        // console.log(feedObjs);
         this.setState({
           feed: feedObjs,
         });
